@@ -1,0 +1,119 @@
+---
+version: "3"
+
+services:
+  l7_client_web:
+    build:
+      context: "./"
+      dockerfile: ".docker/Dockerfile.development"
+    image: "l7_client/web:latest"
+    restart: always
+    # command: php -welsS [::]:8081 -t public
+    # ports:
+    #   - "8081:8081"
+    # # expose:
+    #   - "8081"
+    working_dir: "/app"
+    volumes:
+      - ".:/app"
+      - "app:/app/storage/app/public"
+      - "logs:/app/storage/logs"
+      - "cache:/app/storage/framework/cache"
+      - "sessions:/app/storage/framework/sessions"
+      - "views:/app/storage/framework/views"
+    # depends_on:
+    #   - "sgcfg_database"
+    # links:
+    #   - "sgcfg_database"
+    extra_hosts:
+      - "local.test:192.168.0.142"
+    network_mode: bridge
+
+    env_file:
+      - ".env"
+    environment:
+      docker: "true"
+      APP_URL: "http://local.test"
+      # DB_CONNECTION: "pgsql"
+      # DB_HOST: "sgcfg_database"
+      # DB_PORT: "5432"
+      # DB_DATABASE: "postgres"
+      # DB_USERNAME: "postgres"
+      # DB_PASSWORD: "postgres"
+      ### ToDo: Change to your public DNS name
+      # LETSENCRYPT_EMAIL: "codeexperts@codeexperts.com.br"
+      LETSENCRYPT_HOST: "codeexperts.com.br"
+      VIRTUAL_HOST: "local.test"
+      VIRTUAL_PORT: 8081
+
+    cpu_shares: 128
+    mem_reservation: 128m
+    mem_limit: 256m
+    memswap_limit: -1
+    privileged: true
+    container_name: "l7_client_webapp"
+
+  # l7_client_database:
+  #   build:
+  #     context: "../"
+  #     dockerfile: "database/.docker/Dockerfile.development"
+  #   image: "l7_client/database:latest"
+  #   restart: "always"
+  #   volumes:
+  #     # - "./initial_data:/docker-entrypoint-initdb.d"
+  #     - "dbdata:/var/lib/postgresql/data:rw"
+  #   ports:
+  #     - "5432:5432"
+  #   network_mode: bridge
+
+  #   environment:
+  #     POSTGRES_DB: postgres
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+
+  #   cpu_shares: 128
+  #   mem_reservation: 128m
+  #   mem_limit: 256m
+  #   memswap_limit: -1
+  #   privileged: true
+  #   container_name: l7_client_database
+
+  # l7_client_adminer:
+  #   image: adminer:latest
+  #   restart: always
+  #   ports:
+  #     - "54320:8080"
+  #   # depends_on:
+  #   #   - l7_client_database
+  #   links:
+  #     - l7_client_database
+  #   network_mode: bridge
+
+  #   environment:
+  #     ADMINER_DEFAULT_SERVER: l7_client_database
+  #     ADMINER_DESIGN: pepa-linha-dark
+  #     # ADMINER_DESIGN: nette
+  #     # ADMINER_DESIGN: mancave
+  #     # ADMINER_DESIGN: galkaev
+  #     # ADMINER_DESIGN: hydra
+
+  #   cpu_shares: 128
+  #   mem_reservation: 128m
+  #   mem_limit: 256m
+  #   memswap_limit: -1
+  #   privileged: true
+  #   container_name: l7_client_adminer
+
+volumes:
+  app:
+    name: l7_client_storage_app
+  logs:
+    name: l7_client_storage_logs
+  cache:
+    name: l7_client_storage_cache
+  sessions:
+    name: l7_client_storage_sessions
+  views:
+    name: l7_client_storage_views
+  # dbdata:
+  #   name: l7_client_database
