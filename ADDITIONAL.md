@@ -101,13 +101,15 @@ composer require kitloong/laravel-migrations-generator --dev
 ```
 
 ## [Eloquent Model Generator](https://github.com/krlove/eloquent-model-generator)
-
 ```bash
 composer require doctrine/dbal:^2 --dev
 composer require krlove/eloquent-model-generator --dev
 
 ./artisan krlove:generate:model Category --table-name=categories
 ./artisan krlove:generate:model Device --table-name=devices
+
+./artisan krlove:generate:model Category --table-name=categories --namespace=App\\Modules\\Models --output-path=Modules/Models/
+./artisan krlove:generate:model Device --table-name=devices --namespace=App\\Modules\\Models --output-path=Modules/Models/
 
 touch ./config/eloquent_model_generator.php
 ```
@@ -128,6 +130,13 @@ return [
         'backup'          => true,
     ],
 ];
+```
+
+## [Api Generator](https://github.com/rodrixcornell/laravel-api-generate)
+```bash
+composer require rodrixcornell/apigenerate:^1.0.2 --dev
+
+./artisan api-generate --con=conection_name
 ```
 
 ## Crie um novo arquivo de migração, um novo controlador de recursos para o modelo
@@ -154,12 +163,14 @@ return [
 ```bash
 ./artisan make:request -vvv UserRequest
 ./artisan make:request -vvv UserStoreUpdate
+
+./artisan make:request -vvv --ansi App\\Modules\\Api\\Requests\\CategoryRequest
+./artisan make:request -vvv --ansi App\\Modules\\Api\\Requests\\CategoryStore
+./artisan make:request -vvv --ansi App\\Modules\\Api\\Requests\\CategoryUpdate
 ```
 
 ## [Laravel UI](https://github.com/laravel/ui)
-
 -   [JavaScript & CSS Scaffolding v6.x](https://laravel.com/docs/6.x/frontend).
-
 ```bash
 composer require laravel/ui
 
@@ -187,14 +198,12 @@ npm run dev
 ```
 
 ## Laravel and JWT
-
 -   [JSON Web Token Authentication for Laravel & Lumen](https://jwt-auth.readthedocs.io/en/docs).
 -   [Laravel and JWT](https://blog.pusher.com/laravel-jwt).
 -   [JWT authentication for Lumen 5.4](https://dev.to/ziishaned/jwt-authentication-for-lumen-5-4-3d2m).
 -   [Build a JWT Authenticated API with Lumen(v5.8)](https://dev.to/ndiecodes/build-a-jwt-authenticated-api-with-lumen-2afm).
 -   [JWT Auth Guard for Lumen 5.4](https://github.com/gboyegadada/lumen-jwt).
 -   [Guide for setting up with Lumen? #1102](https://github.com/tymondesigns/jwt-auth/issues/1102).
-
 ```bash
 composer require tymon/jwt-auth
 
@@ -210,18 +219,15 @@ composer require tymon/jwt-auth
 ```
 
 ## API RESTful
-
 -   [Construindo uma API RESTful com Laravel - Parte 1](https://rafaell-lycan.com/2015/construindo-restful-api-laravel-parte-1).
 -   [Construindo uma API RESTful com Laravel - Parte 2](https://rafaell-lycan.com/2015/construindo-restful-api-laravel-parte-2).
 -   [Construindo uma API RESTful com Laravel - Parte 3](https://rafaell-lycan.com/2016/construindo-restful-api-laravel-parte-3).
 
 ## Laravel OCI8
-
 -   Installing Laravel OCI8: [yajra/laravel-oci8](https://yajrabox.com/docs/laravel-oci8/master/installation).
 -   [Utilizando Laravel e OCI8 em 4+1 passos](https://medium.com/@jhonatanvinicius/utilizando-laravel-e-oci8-em-4-passos-48278c4bb8cf).
 
 ## Técnicas de Controle de Acesso de Usuários
-
 -   [Artigo](https://blog.welrbraga.eti.br/?p=642).
 -   [Simple RBAC/ACL for Laravel 5.5 caching and permission groups](https://github.com/YaroslavMolchan/rbac).
 -   [Role based access control for Laravel 5](https://packagist.org/packages/visualappeal/laravel-rbac).
@@ -232,14 +238,12 @@ composer require tymon/jwt-auth
 -   [laravel-permission](https://docs.spatie.be/laravel-permission/v3/introduction).
 
 ## Categoria de visualização hierárquica
-
 -   [Hierarchical Treeview Category Example in Laravel](https://www.codechief.org/article/hierarchical-treeview-category-example-in-laravel).
 -   [Laravel Treeview | Structure and Display Hierarchical Data Example](https://www.codechief.org/article/laravel-treeview-structure-and-display-hierarchical-data-example).
 -   [Structure and Display Hierarchical / Multi-level data in Laravel](https://www.5balloons.info/hierarchical-data-laravel-relationship-display).
 -   [Laravel - Category Treeview Hierarchical Structure Example with Demo](https://www.itsolutionstuff.com/post/laravel-5-category-treeview-hierarchical-structure-example-with-demoexample.html).
 
 ## Nesteds
-
 -   [Effective tree structures in Laravel 4-5](https://github.com/lazychaser/laravel-nestedset).
 -   [Nested set in laravel tutorial](https://appdividend.com/2018/04/30/nested-set-in-laravel-tutorial/).
 -   [Criar menu dynamic usando conjuntos nesteds](https://php.docow.com/criar-menu-dynamic-usando-conjuntos-nesteds.html).
