@@ -2,8 +2,7 @@
 
 namespace App\Modules\Api\Services;
 
-use App\Modules\Models\Device;
-// use App\Modules\Services\DeviceSearchService;
+use App\Modules\Api\Models\Device;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -47,6 +46,8 @@ class DeviceService
 
 	public function update($request, $id)
 	{
+		# $device = Device::find($id);
+
 		$validator = Validator::make($request->all(), [
 			"category_id" => "required",
 			"color" => "required",
@@ -63,12 +64,14 @@ class DeviceService
 				"color" => $request->color,
 				"partNumber" => $request->partNumber,
 			];
-			return Device::where(["id" => $id])->update($data);
+			$device = Device::find($id)->update($data);
 		}
+		return $device;
 	}
 
 	public function destroy($id)
 	{
-		return Device::where(["id" => $id])->delete();
+		$device = Device::find($id)->delete();
+		return $device;
 	}
 }

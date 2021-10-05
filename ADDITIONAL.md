@@ -1,7 +1,6 @@
 # Additional
 
 ## Artisan
-
 ```bash
 ./artisan clear-compiled -vvv && ./artisan cache:clear -vvv && ./artisan config:clear -vvv && ./artisan event:clear -vvv && ./artisan optimize:clear -vvv && ./artisan route:clear -vvv && ./artisan view:clear -vvv
 
@@ -17,7 +16,6 @@
 ## [Laravel Melhores Práticas](https://www.laravelbestpractices.com)
 
 ## Configs Timezone & Localization
-
 -   [Laravel Lang](https://laravel-lang.github.io/lang) [https://github.com/caouecs/Laravel-lang](https://github.com/caouecs/Laravel-lang).
 -   Tradução do Laravel para português brasileiro (pt-BR) [lucascudo/laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization).
 -   A Laravel package for multilingual models [Astrotomic/laravel-translatable](https://docs.astrotomic.info/laravel-translatable).
@@ -39,7 +37,6 @@ mv -fv ./resources/lang/pt-BR.json ./resources/lang/pt_BR.json
 ```
 
 ## Storage - Create the symbolic link using relative paths
-
 ```bash
 cd public
 ln -sfv ../storage/app/public storage
@@ -54,7 +51,6 @@ composer require symfony/filesystem
 ```
 
 ## Migrations & Seeders
-
 -   [How to seed your database using PHP laravel](https://www.codementor.io/@chinemeremnwoga/how-to-seed-your-database-using-php-laravel-10mhltm0ts).
 -   [Como fazer a propagação de banco de dados no Laravel](https://artisansweb.net/database-seeding-laravel).
 -   [Forçando o faker a falar nossa língua](https://medium.com/@vs0uz4/for%C3%A7ando-o-faker-a-falar-nossa-l%C3%ADngua-72d9ee73244c).
@@ -64,6 +60,10 @@ composer require symfony/filesystem
 sed -i "s/mysql/pgsql/;s/3306/5432/;s/127.0.0.1/docker/" .env.example
 sed -i "s/pgsql/mysql/;s/5432/3306/;s/127.0.0.1/docker/" .env.example
 cp -rfv .env.example .env
+
+sed -i 's/DB_DATABASE=laravel/DB_DATABASE=default/g' ./.env
+sed -i 's/DB_USERNAME=root/DB_USERNAME=default/g' ./.env
+sed -i 's/DB_PASSWORD=/DB_PASSWORD=secret/g' ./.env
 ./artisan key:generate --verbose --ansi
 
 touch database/database.sqlite
@@ -90,7 +90,6 @@ DB_HOST=docker ./artisan migrate:rollback -vvv && DB_HOST=docker ./artisan migra
 ```
 
 ## [Laravel Migrations Generator](https://github.com/kitloong/laravel-migrations-generator)
-
 ```bash
 composer require doctrine/dbal:^2 --dev
 composer require kitloong/laravel-migrations-generator --dev
@@ -140,9 +139,7 @@ composer require rodrixcornell/apigenerate:^1.0.2 --dev
 ```
 
 ## Crie um novo arquivo de migração, um novo controlador de recursos para o modelo
-
 ## laravel ^5.6 --all Generate a migration, factory, and resource controller for the model
-
 ```bash
 ./artisan make:model -vvv --force --migration -- App\\Models\\Role
 ./artisan make:model -vvv --force --migration -- App\\Models\\Permission
@@ -159,7 +156,6 @@ composer require rodrixcornell/apigenerate:^1.0.2 --dev
 ```
 
 ## Authorized & Validation Request
-
 ```bash
 ./artisan make:request -vvv UserRequest
 ./artisan make:request -vvv UserStoreUpdate

@@ -2,8 +2,7 @@
 
 namespace App\Modules\Api\Services;
 
-use App\Modules\Models\Category;
-// use App\Modules\\Services\CategorySearchService;
+use App\Modules\Api\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -23,10 +22,10 @@ class CategoryService
 		return $category;
 	}
 
-	public function store(Request $request)
+	public function store($request)
 	{
 		$validator = Validator::make($request->all(), [
-			'name' => ['bail', 'sometimes', 'required', 'string', 'max:128', 'unique:categories'],
+			"name" => "required",
 		]);
 
 		if ($validator->errors()->count()) {
@@ -41,17 +40,14 @@ class CategoryService
 		}
 	}
 
-	public function update(Request $request, $id)
+	public function update($request, $id)
 	{
-		$category = Category::find($id);
+		# $category = Category::find($id);
 
 		$validator = Validator::make($request->all(), [
-			// 'name' => ['bail', 'sometimes', 'required', 'string', 'max:128', 'exists:categories,id', 'unique:categories'],
-			// 'name' => ['bail', 'sometimes', 'required', 'string', 'max:128', 'unique:categories,name,' . $category->id],
-			'name' => ['bail', 'sometimes', 'required', 'string', 'max:128', 'unique:categories,name,' . $id],
+			"name" => "required",
 		]);
 
-		// dd($validator);
 		if ($validator->errors()->count()) {
 			throw new \Exception($validator->errors()->first(), 400);
 		}
@@ -61,8 +57,8 @@ class CategoryService
 				"name" => $request->name,
 			];
 			$category = Category::find($id)->update($data);
-			return $category;
 		}
+		return $category;
 	}
 
 	public function destroy($id)

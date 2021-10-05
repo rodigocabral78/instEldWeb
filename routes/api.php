@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DeviceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,21 +19,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /**
- * Module Category
- */
+* Module Category
+*/
 Route::group([
+	'namespace' => '\App\Modules\Api\Controllers',
 	'prefix' => 'v1',
 ], function () {
-	Route::apiResource('categories', '\App\Modules\Api\Controllers\CategoryController');
-	// Route::apiResource(CategoryController::class);
+	Route::apiResource('categories', CategoryController::class);
 });
 
 /**
- * Module Device
- */
+* Module Device
+*/
 Route::group([
+	'namespace' => '\App\Modules\Api\Controllers',
 	'prefix' => 'v1',
 ], function () {
-	Route::apiResource('devices', '\App\Modules\Api\Controllers\DeviceController');
-	// Route::apiResource(DeviceController::class);
+	Route::apiResource('devices', DeviceController::class);
 });

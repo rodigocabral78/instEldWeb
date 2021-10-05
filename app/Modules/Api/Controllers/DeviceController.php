@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Modules\Api\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +10,8 @@ class DeviceController extends Controller
 {
 	private $deviceService;
 
-	function __construct(DeviceService $deviceService ) {
+	function __construct(DeviceService $deviceService)
+	{
 		$this->deviceService = $deviceService;
 	}
 
@@ -18,12 +20,12 @@ class DeviceController extends Controller
 		try {
 			$data =  $this->deviceService->index($request);
 			return response()->json($data, 200);
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 			$data = [
-				"message"=> "Error, try again!",
-				"text"=> $e->getMessage()
+				"message" => "Error, try again!",
+				"error" => $e,
 			];
-			return response()->json($data, 401);
+			return response()->json($data, 400);
 		}
 	}
 
@@ -32,10 +34,10 @@ class DeviceController extends Controller
 		try {
 			$data = $this->deviceService->show($id);
 			return response()->json($data, 200);
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 			$data = [
-				"message"=> "Error, try again!",
-				"text"=> $e->getMessage()
+				"message" => "Error, try again!",
+				"error" => $e,
 			];
 			return response()->json($data, 400);
 		}
@@ -46,11 +48,10 @@ class DeviceController extends Controller
 		try {
 			$data = $this->deviceService->store($request);
 			return response()->json($data, 201);
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 			$data = [
-				"message"=> "Error, try again!",
-				"code" => $e->getCode(),
-				"text "=> $e->getMessage()
+				"message" => "Error, try again!",
+				"error " => $e,
 			];
 			return response()->json($data, 400);
 		}
@@ -61,11 +62,10 @@ class DeviceController extends Controller
 		try {
 			$data = $this->deviceService->update($request, $id);
 			return response()->json($data, 200);
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				 "code" => $e->getCode(),
-				"text" => $e->getMessage()
+				"error" => $e,
 			];
 			return response()->json($data, 400);
 		}
@@ -75,12 +75,12 @@ class DeviceController extends Controller
 	{
 		try {
 			$data = $this->deviceService->destroy($id);
-			return response()->json($data, 200);
-			# return response()->json($data, 204);
-		} catch(\Exception $e){
+			# return response()->json($data, 200);
+			return response()->json($data, 204);
+		} catch (\Exception $e) {
 			$data = [
-				"message"=> "Error, try again!",
-				"text"=> $e->getMessage()
+				"message" => "Error, try again!",
+				"error" => $e,
 			];
 			return response()->json($data, 400);
 		}

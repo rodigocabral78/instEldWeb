@@ -23,11 +23,9 @@ class CategoryController extends Controller
 		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				"code" => $e->getCode(),
-				"text " => $e->getMessage(),
 				"error" => $e,
 			];
-			return response()->json($data, 401);
+			return response()->json($data, 400);
 		}
 	}
 
@@ -39,8 +37,6 @@ class CategoryController extends Controller
 		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				"code" => $e->getCode(),
-				"text " => $e->getMessage(),
 				"error" => $e,
 			];
 			return response()->json($data, 400);
@@ -55,9 +51,7 @@ class CategoryController extends Controller
 		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				"code" => $e->getCode(),
-				"text " => $e->getMessage(),
-				"error" => $e,
+				"error " => $e,
 			];
 			return response()->json($data, 400);
 		}
@@ -71,8 +65,6 @@ class CategoryController extends Controller
 		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				"code" => $e->getCode(),
-				"text " => $e->getMessage(),
 				"error" => $e,
 			];
 			return response()->json($data, 400);
@@ -83,13 +75,11 @@ class CategoryController extends Controller
 	{
 		try {
 			$data = $this->categoryService->destroy($id);
-			return response()->json($data, 200);
-			# return response()->json($data, 204);
+			# return response()->json($data, 200);
+			return response()->json($data, 204);
 		} catch (\Exception $e) {
 			$data = [
 				"message" => "Error, try again!",
-				"code" => $e->getCode(),
-				"text " => $e->getMessage(),
 				"error" => $e,
 			];
 			return response()->json($data, 400);

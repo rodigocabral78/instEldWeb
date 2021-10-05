@@ -1,14 +1,11 @@
 <?php
+
 namespace App\Modules\Api\Services;
 
 class DeviceSearchService
 {
 	public function search($queryBuilder, $request)
 	{
-		if ($request->id) {
-			$queryBuilder->where("id", "=", $request->id);
-		}
-
 		if ($request->category_id) {
 			$queryBuilder->where("category_id", "=", $request->category_id);
 		}
@@ -17,13 +14,17 @@ class DeviceSearchService
 			$queryBuilder->where("color", "=", $request->color);
 		}
 
+		if ($request->id) {
+			$queryBuilder->where("id", "=", $request->id);
+		}
+
 		if ($request->partNumber) {
 			$queryBuilder->where("partNumber", "=", $request->partNumber);
 		}
 
 		if ($request->order) {
 			$order = ($request->order == "asc") ? "asc" : "desc";
-			$queryBuilder->orderBy("id", $order);
+			$queryBuilder->orderBy("category_id", $order);
 		}
 
 		return $queryBuilder->paginate(($request->count) ? $request->count : 10);
